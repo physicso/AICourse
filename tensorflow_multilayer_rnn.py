@@ -21,7 +21,7 @@ n_input = 28 # MNIST data input (Image shape: 28*28)
 n_steps = 28 # Timesteps
 n_hidden = 128 # Hidden layer num of features
 n_classes = 10 # MNIST total classes (0-9 digits)
-n_layers = 4 #LSTM layer num
+n_layers = 2 #LSTM layer num
 # LSTM_CELL Definition
 lstm_cell = tf.nn.rnn_cell.BasicLSTMCell(n_hidden, forget_bias=0.0, state_is_tuple=True)
 cell = tf.nn.rnn_cell.MultiRNNCell([lstm_cell] * n_layers, state_is_tuple=True)
@@ -88,12 +88,13 @@ Extracting MNIST_data/t10k-images-idx3-ubyte.gz
 Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
 The shape of input images:
 (55000, 784)
-Iter 12800, Minibatch Loss= 1.635742, Training Accuracy= 0.45312
-Iter 25600, Minibatch Loss= 1.065403, Training Accuracy= 0.67969
-Iter 38400, Minibatch Loss= 0.499141, Training Accuracy= 0.88281
-Iter 51200, Minibatch Loss= 0.573140, Training Accuracy= 0.79688
+Iter 10000, Minibatch Loss= 1.038998, Training Accuracy= 0.65000
+Iter 20000, Minibatch Loss= 0.601777, Training Accuracy= 0.81000
+Iter 30000, Minibatch Loss= 0.560588, Training Accuracy= 0.80000
+Iter 40000, Minibatch Loss= 0.428218, Training Accuracy= 0.82000
+Iter 50000, Minibatch Loss= 0.508600, Training Accuracy= 0.80000
 ...
-Iter 998400, Minibatch Loss= 0.058947, Training Accuracy= 0.98438
+Iter 990000, Minibatch Loss= 0.002673, Training Accuracy= 1.00000
 Optimization Finished!
-Testing Accuracy: 0.976562
+Testing Accuracy: 0.99
 '''

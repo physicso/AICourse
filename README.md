@@ -17,3 +17,12 @@ TensorFlow: tensorflow_classification.py
 Scikit-Learn: sklearn_neural_network.py
 
 TensorFlow: tensorflow_neural_network.py
+
+#CNN
+
+tensorflow_cnn.py
+
+#RNN
+
+Single-Hidden-Layer: tensorflow_rnn.py
+Multi-Layer: tensorflow_multilayer_rnn.py
