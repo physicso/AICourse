@@ -69,7 +69,7 @@ while step * batch_size < training_iters:
         acc = sess.run(accuracy, feed_dict={x: batch_xs, y: batch_ys,})
             # Calculate batch loss
         loss = sess.run(cost, feed_dict={x: batch_xs, y: batch_ys})
-        print "Iter " + str(step*batch_size) + ", Minibatch Loss= " + "{:.6f}".format(loss) +  ", Training Accuracy= " + "{:.5f}".format(acc)
+        print "Iteration: " + str(step*batch_size) + ", Minibatch Loss: " + "{:.6f}".format(loss) +  ", Training Accuracy= " + "{:.5f}".format(acc)
     step += 1
 print "Optimization Finished!"
 

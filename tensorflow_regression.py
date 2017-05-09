@@ -31,9 +31,9 @@ with tf.Session() as sess:
         for (x_train, y_train) in zip(train_X, train_Y):
             sess.run(optimizer, feed_dict={X: x_train, y: y_train})
         if epoch % display_step == 0:
-            print "Epoch:", '%04d' % (epoch + 1), "cost =", "{:.9f}".format(
+            print "Iteration: ", '%04d' % (epoch + 1), "Loss: ", "{:.9f}".format(
                 sess.run(cost, feed_dict={X: train_X, y: train_Y})), \
                 "W =", sess.run(W), "b =", sess.run(b)
     print "Optimization Finished!"
     training_cost = sess.run(cost, feed_dict={X: train_X, y: train_Y})
-    print "Training cost =", training_cost, "W =", sess.run(W), "b =", sess.run(b), '\n'
+    print "Training Loss =", training_cost, "W =", sess.run(W), "b =", sess.run(b), '\n'

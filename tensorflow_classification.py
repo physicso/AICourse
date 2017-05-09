@@ -26,6 +26,6 @@ with tf.Session() as sess:
 		batch_xs, batch_ys = mnist.train.next_batch(batch_size)
 		train_step.run({x: batch_xs, y_: batch_ys})
 		if iter % display_step == 0:
-			print "Epoch:", '%04d' % (iter + 1), "accuracy =", "{:.9f}".format(
+			print "Iteration:", '%04d' % (iter + 1), "Accuracy =", "{:.9f}".format(
 				sess.run(accuracy, feed_dict={x: batch_xs, y_: batch_ys}))
 	print "Test Accuracy: " + "{:.9f}".format(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
