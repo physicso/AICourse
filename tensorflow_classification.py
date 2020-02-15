@@ -1,3 +1,6 @@
+"""
+This script works on TensorFlow 1.x :)
+"""
 from tensorflow.examples.tutorials.mnist import input_data
 import tensorflow as tf
 
@@ -21,11 +24,11 @@ training_iteration = 10000
 batch_size = 100
 display_step = 50
 with tf.Session() as sess:
-	sess.run(tf.initialize_all_variables())
-	for iter in range(training_iteration):
-		batch_xs, batch_ys = mnist.train.next_batch(batch_size)
-		train_step.run({x: batch_xs, y_: batch_ys})
-		if iter % display_step == 0:
-			print "Iteration:", '%04d' % (iter + 1), "Accuracy =", "{:.9f}".format(
-				sess.run(accuracy, feed_dict={x: batch_xs, y_: batch_ys}))
-	print "Test Accuracy: " + "{:.9f}".format(sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
+    sess.run(tf.initialize_all_variables())
+    for iteration in range(training_iteration):
+        batch_xs, batch_ys = mnist.train.next_batch(batch_size)
+        train_step.run({x: batch_xs, y_: batch_ys})
+        if iteration % display_step == 0:
+            print('Iteration: %5d | Training accuracy: %.6f' %
+                  (iteration + 1, sess.run(accuracy, feed_dict={x: batch_xs, y_: batch_ys})))
+    print('Test accuracy: %.6f' % sess.run(accuracy, feed_dict={x: mnist.test.images, y_: mnist.test.labels}))

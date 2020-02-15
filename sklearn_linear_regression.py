@@ -21,7 +21,6 @@ plt.show()
 
 model = LinearRegression()
 model.fit(X, y)
-model.coef_
 print('The Price of Size 160 Apartment: %.2fW' % model.predict([[160]])[0])
 
 

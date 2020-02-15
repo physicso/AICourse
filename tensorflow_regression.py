@@ -1,3 +1,6 @@
+"""
+This script works on TensorFlow 1.x :)
+"""
 import tensorflow as tf
 import numpy
 
@@ -7,12 +10,12 @@ train_Y = numpy.asarray([320.0, 360.0, 400.0, 455.0, 490.0, 546.0, 580.0])
 train_X /= 100.0
 train_Y /= 100.0
 
-X = tf.placeholder("float")
-y = tf.placeholder("float")
-W = tf.Variable(numpy.random.randn(), name="weight")
-b = tf.Variable(numpy.random.randn(),name="bias")
+X = tf.placeholder('float')
+y = tf.placeholder('float')
+W = tf.Variable(numpy.random.randn(), name='weight')
+b = tf.Variable(numpy.random.randn(), name='bias')
 n_samples = train_X.shape[0]
-y_pred = tf.add(tf.mul(X, W), b)
+y_pred = tf.add(tf.multiply(X, W), b)
 
 
 cost = tf.reduce_sum(tf.pow((y_pred - y), 2))/(2 * n_samples)
@@ -31,9 +34,8 @@ with tf.Session() as sess:
         for (x_train, y_train) in zip(train_X, train_Y):
             sess.run(optimizer, feed_dict={X: x_train, y: y_train})
         if epoch % display_step == 0:
-            print "Iteration: ", '%04d' % (epoch + 1), "Loss: ", "{:.9f}".format(
-                sess.run(cost, feed_dict={X: train_X, y: train_Y})), \
-                "W =", sess.run(W), "b =", sess.run(b)
-    print "Optimization Finished!"
+            print('Iteration: %04d | Loss: %.6f | W: %.6f | b: %.6f'
+                  % (epoch + 1, sess.run(cost, feed_dict={X: train_X, y: train_Y}),
+                     sess.run(W), sess.run(b)))
     training_cost = sess.run(cost, feed_dict={X: train_X, y: train_Y})
-    print "Training Loss =", training_cost, "W =", sess.run(W), "b =", sess.run(b), '\n'
+    print('Training loss: %.6f | W: %.6f | b: %.6f' % (training_cost, sess.run(W), sess.run(b)))

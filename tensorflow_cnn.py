@@ -1,5 +1,5 @@
 import tensorflow as tf
-from tensorflow.examples.tutorials.mnist import input_data
+import input_data
 
 
 def weight_variable(shape):
@@ -20,7 +20,7 @@ def max_pool_2x2(x):
     return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
 
 
-mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+mnist = input_data.read_data_sets('MNIST_data/', one_hot=True)
 
 sess = tf.InteractiveSession()
 
@@ -51,7 +51,7 @@ b_fc1 = bias_variable([1024])
 h_pool2_flat = tf.reshape(h_pool2, [-1, 7 * 7 * 64])
 h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
 
-keep_prob = tf.placeholder("float")
+keep_prob = tf.placeholder('float')
 h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
 
 W_fc2 = weight_variable([1024, 10])
@@ -61,20 +61,18 @@ y_conv = tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
 cross_entropy = -tf.reduce_sum(y_ * tf.log(y_conv))
 train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
-accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+accuracy = tf.reduce_mean(tf.cast(correct_prediction, 'float'))
 sess.run(tf.initialize_all_variables())
 
-for i in range(20000):
+for _ in range(20000):
     batch = mnist.train.next_batch(50)
-    if i % 100 == 0:
+    if _ % 100 == 0:
         train_accuracy = accuracy.eval(feed_dict={
             x: batch[0], y_: batch[1], keep_prob: 1.0})
-        print "step %d, training accuracy %.3f" % (i, train_accuracy)
+        print('Iteration: %5d | Training accuracy: %.3f' % (_, train_accuracy))
     train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
 
-print "Training finished"
-
-print "test accuracy %.3f" % accuracy.eval(feed_dict={
+print('Test accuracy: %.3f') % accuracy.eval(feed_dict={
     x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0})
 
 
@@ -85,13 +83,9 @@ Extracting MNIST_data/train-images-idx3-ubyte.gz
 Extracting MNIST_data/train-labels-idx1-ubyte.gz
 Extracting MNIST_data/t10k-images-idx3-ubyte.gz
 Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
-step 0, training accuracy 0.140
-step 100, training accuracy 0.840
-step 200, training accuracy 0.900
-step 300, training accuracy 0.840
-step 400, training accuracy 0.980
+Iteration:     0 | Training accuracy: 0.100
+Iteration:   100 | Training accuracy: 0.780
 ...
-step 19900, training accuracy 1.000
-Training finished
-test accuracy 0.993
+Iteration: 19900 | Training accuracy: 1.000
+Test accuracy: 0.993
 '''

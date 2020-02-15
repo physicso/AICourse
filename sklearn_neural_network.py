@@ -15,10 +15,10 @@ def read_data(data_file):
 
 
 data_file = "mnist.pkl.gz"
-print 'Reading training and testing data...'
+print('Reading data...')
 X_train, y_train, X_test, y_test = read_data(data_file)
 mlp = MLPClassifier(hidden_layer_sizes=(200,200), activation='relu', max_iter=100, alpha=1e-4,
                     solver='sgd', tol=1e-4, verbose=10, learning_rate_init=.1)
 mlp.fit(X_train, y_train)
-print("Training Set Accuracy: %f" % mlp.score(X_train, y_train))
-print("Test Set Accuracy: %f" % mlp.score(X_test, y_test))
+print('Training accuracy: %.6f' % mlp.score(X_train, y_train))
+print('Test accuracy: %.6f' % mlp.score(X_test, y_test))

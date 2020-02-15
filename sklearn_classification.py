@@ -1,7 +1,7 @@
 import time
-import sklearn
 from sklearn import linear_model
 from sklearn import svm
+from sklearn.metrics import accuracy_score
 import cPickle as pickle
 import gzip
  
@@ -47,7 +47,7 @@ def read_data(data_file):
 
 if __name__ == '__main__':
     data_file = "mnist.pkl.gz"
-    print 'Reading training and testing data...'
+    print('Reading training and testing data...')
     train_x, train_y, test_x, test_y = read_data(data_file)
     test_classifiers = ['LR', 'LRM', 'SVM', 'SVMP']
     classifiers = {'LR':logistic_regression_classifier,
@@ -57,13 +57,13 @@ if __name__ == '__main__':
     }
     num_train, num_feat = train_x.shape
     num_test, num_feat = test_x.shape
-    print '******************** Data Info *********************'
-    print '#Training data: %d, #Testing_data: %d, Dimension: %d' % (num_train, num_test, num_feat)
+    print('******************** Data Info *********************')
+    print('Training data: %d | Test data: %d | Dimension: %d' % (num_train, num_test, num_feat))
     for classifier in test_classifiers:
-        print '******************* %s ********************' % classifier
+        print('******************* %s ********************' % classifier)
         start_time = time.time()
         model = classifiers[classifier](train_x, train_y)
-        print 'Training took %fs!' % (time.time() - start_time)
+        print('Training took %.6fs' % (time.time() - start_time))
         predict = model.predict(test_x)
-        accuracy = sklearn.accuracy_score(test_y, predict)
-        print 'Accuracy: %.2f%%' % (100 * accuracy)
+        accuracy = accuracy_score(test_y, predict)
+        print('Test accuracy: %.6f' % (accuracy))
