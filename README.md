@@ -1,5 +1,7 @@
 # AICourse
 
+All the codes were tested on TensorFlow 1.12.
+
 #Linear Regression
 
 Scikit-Learn: sklearn_linear_regression.py
